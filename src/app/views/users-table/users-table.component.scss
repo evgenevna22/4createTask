@@ -1,0 +1,52 @@
+.table-card {
+  position: relative;
+  max-width: 700px;
+  min-height: 200px;
+  margin: 20px auto;
+
+  &__spinner {
+    position: absolute;
+		top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+		background: rgba(255, 255, 255, 0.5);
+		z-index: 1;
+  }
+}
+
+.mat-column-id.mdc-data-table__header-cell {
+  max-width: 100px;
+	min-width: 100px;
+}
+
+.mat-column-id:not(.mdc-data-table__header-cell) {
+	max-width: 100px;
+	min-width: 100px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.mat-column-name {
+	width: 70%;
+}
+
+.mat-column-active {
+	width: 20%;
+}
+
+.td-wrapper {
+  &--loading {
+    animation: blinker 900ms linear infinite;
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.2;
+  }
+}

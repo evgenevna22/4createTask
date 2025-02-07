@@ -1,0 +1,45 @@
+
+<mat-card class="table-card">
+  <div class="table-card__spinner" *ngIf="(loadingState$ | async) === loadingStateEnum.loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <table mat-table [dataSource]="users$">
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> <span class="td td--id"
+          [title]="element.id">{{element.id}}</span> </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Active Column -->
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef> Active </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="td-wrapper"
+          [class.td-wrapper--loading]="(loadingState$ | async) === loadingStateEnum.loading && (updatedUserId$ | async) === element.id">
+          <mat-checkbox [checked]="element.active"
+            (change)="toggleActivity(element)">
+          </mat-checkbox>
+        </div>
+      </td>
+    </ng-container>
+  </table>
+</mat-card>
+
+<button mat-raised-button (click)="addUser()" [disabled]="isAddingAvailable$ | async">Add user</button>
+
+<ng-container *ngIf="users$ | async as users">
+  <br>data: {{ users | json }} <br>
+  length: {{ users.length }} <br>
+</ng-container>
