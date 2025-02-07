@@ -1,15 +1,18 @@
+:host {
+  width: 100%;
+}
+
 .add-user-modal {
   display: flex;
 	flex-direction: column;
-	width: 350px;
-	height: 250px;
-	padding: 16px;
+  width: 100%;
+	padding: var(--space-unit);
 	box-sizing: border-box;
 
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: var(--space-xss);
   }
 
   &__control {
@@ -20,7 +23,7 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    color: red;
+    color: var(--warning);
   }
 
   &__btn {

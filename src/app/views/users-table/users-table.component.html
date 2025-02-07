@@ -1,13 +1,17 @@
-
-<mat-card class="table-card">
-  <div class="table-card__spinner" *ngIf="(loadingState$ | async) === loadingStateEnum.loading">
+<mat-card class="users-card">
+  <div class="users-card__spinner"
+    *ngIf="(loadingState$ | async) === loadingStateEnum.loading">
     <mat-spinner></mat-spinner>
   </div>
 
-  <table mat-table [dataSource]="users$">
+  <table mat-table [dataSource]="users$" class="users-card__table">
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="3">No data found</td>
+    </tr>
+
 
     <!-- Id Column -->
     <ng-container matColumnDef="id">
@@ -35,11 +39,7 @@
       </td>
     </ng-container>
   </table>
+
+  <button mat-raised-button (click)="addUser()"
+    [disabled]="isAddingAvailable$ | async">Add user</button>
 </mat-card>
-
-<button mat-raised-button (click)="addUser()" [disabled]="isAddingAvailable$ | async">Add user</button>
-
-<ng-container *ngIf="users$ | async as users">
-  <br>data: {{ users | json }} <br>
-  length: {{ users.length }} <br>
-</ng-container>

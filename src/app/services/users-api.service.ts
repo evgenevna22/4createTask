@@ -45,11 +45,13 @@ export class UsersApiService {
   }
 
   public addUser(user: Omit<User, 'id'>): Observable<void> {
-    this._users.push({
-      ...user,
-      id: Number(Date.now().toString())
-    });
-    console.log('addUser api service:', this._users);
+    this._users = [
+      ...this._users,
+      {
+        ...user,
+        id: Number(Date.now().toString())
+      }
+    ]
     return of(void 0);
   }
 

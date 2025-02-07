@@ -49,36 +49,27 @@ export class UsersTableComponent implements OnInit, OnDestroy {
   private _query = inject(UsersQuery);
   private _service = inject(UsersSevice);
   private _dialog = inject(MatDialog);
+
   private _unsubscribe$ = new Subject<void>();
+
+  public loadingStateEnum = LoadingState;
 
   public users$: Observable<User[]> = this._query.select('users');
   public updatedUserId$ = new BehaviorSubject<number | null>(null);
+
   public loadingState$: Observable<LoadingState> =
     this._query.select('loadingState');
+
   public isAddingAvailable$ = this._query.select('users').pipe(
     filter((users) => !!users.length),
-    tap((users) => console.log('users:', users.length)),
-    tap((users) =>
-      console.log(
-        'users every:',
-        users.every((user) => !user.active)
-      )
-    ),
-    map((users) => users.length > 5 && users.some((user) => !user.active))
+    map((users) => users.length >= 5 || users.some((user) => !user.active))
   );
 
   public displayedColumns = ['id', 'name', 'active'];
   @ViewChild(MatTable) private _table!: MatTable<User>;
 
-  public loadingStateEnum = LoadingState;
-
   ngOnInit(): void {
-    this._service
-      .loadUsers()
-      .pipe(takeUntil(this._unsubscribe$))
-      .subscribe(console.log); // todo: remove
-
-      this._query.select('users').subscribe(res => console.log('ngOnInit this._query.select(users): ', res));
+    this._service.loadUsers().pipe(takeUntil(this._unsubscribe$)).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -100,7 +91,9 @@ export class UsersTableComponent implements OnInit, OnDestroy {
 
   public addUser(): void {
     this._dialog
-      .open(AddUserModalComponent)
+      .open(AddUserModalComponent, {
+        panelClass: 'dialog-container',
+      })
       .afterClosed()
       .pipe(
         filter((user: Omit<User, 'id'>) => !!user),
@@ -110,7 +103,6 @@ export class UsersTableComponent implements OnInit, OnDestroy {
       )
       .subscribe(() => {
         this._table.renderRows();
-        console.log('addUser() subsc')
       });
   }
 
