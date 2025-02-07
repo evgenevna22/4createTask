@@ -1,0 +1,23 @@
+<section class="add-user-modal">
+  <h3 class="add-user-modal__title">Fill the user's data</h3>
+  <form class="add-user-modal__form" [formGroup]="userForm">
+    <mat-form-field class="add-user-modal__control">
+      <mat-label>Name:</mat-label>
+      <input matInput id="name" type="text" formControlName="name">
+
+      <mat-error *ngIf="userForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+
+      <mat-error *ngIf="userForm.get('name')?.hasError('uniqueName')">
+        Please write unique name.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="active">Active</mat-checkbox>
+
+    <button mat-raised-button class="add-user-modal__btn"
+      [disabled]="userForm.invalid"
+      [mat-dialog-close]="userForm.value">Proceed</button>
+  </form>
+</section>
