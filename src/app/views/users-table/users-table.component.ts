@@ -16,7 +16,6 @@ import {
   Subject,
   switchMap,
   takeUntil,
-  tap,
 } from 'rxjs';
 import { UsersQuery } from '../../state/users.query';
 import { User } from '../../models/user.interface';

@@ -17,7 +17,7 @@
     <mat-checkbox formControlName="active">Active</mat-checkbox>
 
     <button mat-raised-button class="add-user-modal__btn"
-      [disabled]="userForm.invalid"
-      [mat-dialog-close]="userForm.value">Proceed</button>
+      [disabled]="userForm.invalid || userForm.pending"
+      [mat-dialog-close]="userForm.value">Create</button>
   </form>
 </section>

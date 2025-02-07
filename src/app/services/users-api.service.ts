@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of, take } from 'rxjs';
+import { delay, first, Observable, of, take } from 'rxjs';
 import { User } from '../models/user.interface';
 
 @Injectable({
@@ -10,12 +10,12 @@ export class UsersApiService {
     {
       id: 10,
       name: 'Holman Mccarthy',
-      active: false,
+      active: true,
     },
     {
       id: 7,
       name: 'Chandra Santana',
-      active: false,
+      active: true,
     },
     {
       id: 3,
@@ -26,8 +26,7 @@ export class UsersApiService {
 
   public getUsers(): Observable<User[]> {
     return of(this._users).pipe(
-      delay(500),
-      take(1)
+      delay(500)
     );
   }
 
@@ -56,6 +55,6 @@ export class UsersApiService {
   }
 
   public isNameTaken(name: string): Observable<boolean> {
-    return of(this._users.some(user => user.name.trim().toLowerCase() === name));
+    return of(this._users.some(user => user.name.trim().toLowerCase() === name)).pipe(delay(500), first());
   }
 }
