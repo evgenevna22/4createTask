@@ -3,7 +3,7 @@
 ### Hi there!
 This is a technical task with the following stack:
 
-- [Angular 16](https://github.com/angular) 
+- [Angular 16](https://v16.angular.io/) 
 - [Akita as a state management](https://opensource.salesforce.com/akita/)
 - [RxJs](http://rxjs.dev)
 
