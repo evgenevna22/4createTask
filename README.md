@@ -7,7 +7,7 @@ This is a technical task with the following stack:
 - [Akita as a state management](https://opensource.salesforce.com/akita/)
 - [RxJs](http://rxjs.dev)
 
-This version of Angular was chosen by requirement of using Akita. Unfortunately, Akita doesn't fully support Angular versions higher than 16 (due to `angular.json` config changes). Check [this issue](https://github.com/salesforce/akita/issues/1077) issue on GitHab for more details.
+This version of Angular was chosen by requirement of using Akita. Unfortunately, Akita doesn't fully support Angular versions higher than 16 (due to `angular.json` config changes). Check [this issue](https://github.com/salesforce/akita/issues/1077) on GitHab for more details.
 
 ### Everything you need to start the project
 
